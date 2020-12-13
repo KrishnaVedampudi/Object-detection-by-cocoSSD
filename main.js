@@ -15,7 +15,7 @@ function setup()
 function modelLoaded()
 {
     console.log('Model Loaded!');
-    objectDetector.detect(img, gotResults);
+    objectDetector.detect(img, gotResults);    
     document.getElementById('status').innerHTML = "Status: Detecting objects";
 }
 function gotResults(error, results)
@@ -26,25 +26,24 @@ function gotResults(error, results)
    }else{
        console.log(results);
        objects = results;
+       status = true;
    }
 }
 function draw()
-
 {
-    image(img, 0, 0, 640, 400);
-    textSize(18);
+    image(img, 0, 0, 640, 400);    
     if(status != "")
     {
       for(i=0; i <= objects.length; i++)
-       {
+       {        
+        textSize(18);
         document.getElementById("status").innerHTML = "Status : Objects Detetcted";
         fill('red');
-        percent = floor(objects[i].confidence * 100);
-        text(objects[i].label + " " + percent + "%", objects[i].x +15, objects[i].y + 15 );
+        percent = floor(objects[i].confidence*100);
+        text(objects[i].label + " " + percent + "%", objects[i].x +15, objects[i].y + 15);
         noFill();
         stroke('red');
-        rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height );
-       }
-    }
-        
+        rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height);
+       } 
+    }        
 }
